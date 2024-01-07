@@ -4,7 +4,7 @@
 void drawBoard(char *spaces);
 void playerMove(char *spaces, char player);
 void computerMove(char *spaces, char computer);
-bool checkWinner(char *spaces, char player, char computer);
+bool checkWinner(char *spaces, char player);
 bool checkTie(char *spaces);
 
 int main() {
@@ -19,14 +19,14 @@ int main() {
   while (running) {
     playerMove(spaces, player);
     drawBoard(spaces);
-    if (checkWinner(spaces, player, computer)) {
+    if (checkWinner(spaces, player)) {
       running = false;
       break;
     }
 
     computerMove(spaces, computer);
     drawBoard(spaces);
-    if (checkWinner(spaces, player, computer)) {
+    if (checkWinner(spaces, player)) {
       running = false;
       break;
     }
@@ -81,7 +81,7 @@ void computerMove(char *spaces, char computer) {
   }
 }
 
-bool checkWinner(char *spaces, char player, char computer) {
+bool checkWinner(char *spaces, char player) {
 
   if (spaces[0] != ' ' && spaces[0] == spaces[1] && spaces[1] == spaces[2]) {
     spaces[0] == player ? std::cout << "YOU WIN\n" : std::cout << "YOU LOSE\n";
