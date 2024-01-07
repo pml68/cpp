@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 
 void drawBoard(char *spaces);
@@ -17,6 +18,9 @@ int main() {
 
   while (running) {
     playerMove(spaces, player);
+    drawBoard(spaces);
+
+    computerMove(spaces, computer);
     drawBoard(spaces);
   }
 
@@ -47,7 +51,7 @@ void drawBoard(char *spaces) {
 void playerMove(char *spaces, char player) {
   int number;
   do {
-    std::cout << "Enter a spot to place a marker (1-9)";
+    std::cout << "Enter a spot to place a marker (1-9): ";
     std::cin >> number;
     number--;
     if (spaces[number] == ' ') {
@@ -57,7 +61,17 @@ void playerMove(char *spaces, char player) {
   } while (!number > 0 || !number < 8);
 }
 
-void computerMove(char *spaces, char computer) {}
+void computerMove(char *spaces, char computer) {
+  int number;
+  srand(time(0));
+  while (true) {
+    number = rand() % 9;
+    if (spaces[number] == ' ') {
+      spaces[number] = computer;
+      break;
+    }
+  }
+}
 
 bool checkWinner(char *spaces, char player, char computer) { return true; }
 
