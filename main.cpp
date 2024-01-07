@@ -16,12 +16,22 @@ int main() {
 
   result = sumEvenDigits(cardNumber) + sumOddDigits(cardNumber);
 
-  cout << result;
+  string validity;
+
+  if (result % 10 == 0) {
+    validity = "valid";
+  } else {
+    validity = "invalid";
+  };
+
+  cout << "\n"
+       << result << "\n"
+       << "The number is " << validity << "\n";
 
   return 0;
 }
 
-int getDigits(const int number) { return number % 10; }
+int getDigits(const int number) { return number % 10 + (number / 10 % 10); }
 
 int sumEvenDigits(const string cardNumber) {
   int sum = 0;
@@ -34,7 +44,7 @@ int sumEvenDigits(const string cardNumber) {
 int sumOddDigits(const string cardNumber) {
   int sum = 0;
   for (int i = 1; i < sizeof(cardNumber) / sizeof(cardNumber[0]) / 2; i += 2) {
-    sum += cardNumber[i];
+    sum += cardNumber[i] - '0';
   }
   return sum;
 }
